@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:villa_sr_app/screens/beranda_screen.dart';
+import 'package:villa_sr_app/screens/home_screen.dart';
 import 'package:villa_sr_app/screens/pemesanan_screen.dart';
 
 class NavBar extends StatefulWidget {
@@ -20,7 +20,7 @@ class _NavBarState extends State<NavBar> {
         body: IndexedStack(
           index: selectedIndex,
           children: [
-            const BerandaScreen(),
+            const HomeScreen(),
             const PemesananScreen(),
             Container(
               color: Colors.purple[100],

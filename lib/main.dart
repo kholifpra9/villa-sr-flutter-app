@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:villa_sr_app/widgets/nav_bar.dart';
 
 void main() {

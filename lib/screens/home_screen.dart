@@ -3,84 +3,30 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:villa_sr_app/widgets/nav_bar.dart';
 
-class BerandaScreen extends StatefulWidget {
-  const BerandaScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  State<BerandaScreen> createState() => _BerandaScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _BerandaScreenState extends State<BerandaScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "SR VILLA",
+          style: TextStyle(color: Colors.red, fontWeight: FontWeight.w900),
+        ),
+        actions: const [],
+      ),
       body: SingleChildScrollView(
         child: Container(
           // padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
-              Container(
-                height: 160.0,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(
-                      "https://cf.bstatic.com/xdata/images/hotel/max1280x900/492693887.jpg?k=1637b44d47ff6059585f4f6e06dc0ffff8c2f2001a47de01f577d198ff73b710&o=&hp=1",
-                    ),
-                    fit: BoxFit.cover,
-                  ),
-                  // borderRadius: BorderRadius.all(
-                  //   Radius.circular(
-                  //     16.0,
-                  //   ),
-                  // ),
-                ),
-                child: Stack(
-                  children: [
-                    Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.black26,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(
-                            16.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      left: 20.0,
-                      top: 0.0,
-                      bottom: 0.0,
-                      child: SizedBox(
-                        // width: 100.0,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Hi Guest111",
-                              style: TextStyle(
-                                fontSize: 30.0,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              "Selamat Datang!",
-                              style: TextStyle(
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               SizedBox(height: 20),
               //carousell
               Builder(builder: (context) {
@@ -123,13 +69,12 @@ class _BerandaScreenState extends State<BerandaScreen> {
                 );
               }),
               SizedBox(height: 20),
-              //penawaran
-
+              //penginapan
               Container(
                 alignment: Alignment.centerLeft,
                 padding: EdgeInsets.only(left: 20),
                 child: Text(
-                  "Penawaran",
+                  "Penginapan",
                   style: TextStyle(
                     fontSize: 22.5,
                     fontWeight: FontWeight.bold,
@@ -170,7 +115,8 @@ class _BerandaScreenState extends State<BerandaScreen> {
                         return Container(
                           height: 100.0,
                           width: MediaQuery.of(context).size.width * 0.7,
-                          margin: const EdgeInsets.only(right: 16.0),
+                          margin:
+                              const EdgeInsets.only(right: 12.0, left: 12.0),
                           decoration: BoxDecoration(
                             image: DecorationImage(
                               image: NetworkImage(
@@ -189,6 +135,81 @@ class _BerandaScreenState extends State<BerandaScreen> {
                     ),
                   );
                 },
+              ),
+
+              SizedBox(height: 20),
+              //penawaran
+              Container(
+                alignment: Alignment.centerLeft,
+                padding: EdgeInsets.only(left: 20),
+                child: Text(
+                  "Penawaran",
+                  style: TextStyle(
+                    fontSize: 22.5,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Container(
+                height: 160.0,
+                margin: EdgeInsets.only(left: 16, right: 16),
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(
+                      "https://images.unsplash.com/photo-1550547660-d9450f859349?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80",
+                    ),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(
+                      16.0,
+                    ),
+                  ),
+                ),
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.black26,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(
+                            16.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      left: 20.0,
+                      top: 0.0,
+                      bottom: 0.0,
+                      child: SizedBox(
+                        width: 100.0,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "30%",
+                              style: TextStyle(
+                                fontSize: 30.0,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              "Discount Only Valid for Today",
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
 
               SizedBox(height: 35),
