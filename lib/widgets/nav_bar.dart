@@ -3,7 +3,7 @@ import 'package:villa_sr_app/screens/home_screen.dart';
 import 'package:villa_sr_app/screens/pemesanan_screen.dart';
 
 class NavBar extends StatefulWidget {
-  const NavBar({Key? key}) : super(key: key);
+  const NavBar({super.key});
 
   @override
   State<NavBar> createState() => _NavBarState();
@@ -31,8 +31,9 @@ class _NavBarState extends State<NavBar> {
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
           currentIndex: selectedIndex,
-          selectedItemColor: Colors.grey[700],
+          selectedItemColor: const Color.fromARGB(255, 202, 54, 54),
           unselectedItemColor: Colors.grey[500],
           onTap: (index) {
             selectedIndex = index;
@@ -46,15 +47,15 @@ class _NavBarState extends State<NavBar> {
               ),
             ),
             BottomNavigationBarItem(
-              label: "Order",
+              label: "Pemesanan",
               icon: Icon(
-                Icons.list,
+                Icons.book_rounded,
               ),
             ),
             BottomNavigationBarItem(
-              label: "Favorite",
+              label: "Bantuan?",
               icon: Icon(
-                Icons.favorite,
+                Icons.live_help,
               ),
             ),
             BottomNavigationBarItem(
