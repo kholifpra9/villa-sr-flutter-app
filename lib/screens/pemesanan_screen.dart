@@ -1,10 +1,9 @@
 // ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
-import 'package:villa_sr_app/widgets/nav_bar.dart';
 
 class PemesananScreen extends StatefulWidget {
-  const PemesananScreen({Key? key}) : super(key: key);
+  const PemesananScreen({super.key});
 
   @override
   State<PemesananScreen> createState() => _PemesananScreenState();
@@ -26,7 +25,6 @@ class _PemesananScreenState extends State<PemesananScreen> {
                   children: List.generate(
                     10,
                     (index) {
-                      var item = {};
                       bool selected = index == 0;
 
                       return Container(
