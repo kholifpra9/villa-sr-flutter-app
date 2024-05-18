@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:villa_sr_app/screens/pemesanan_screen.dart';
 import 'package:villa_sr_app/widgets/nav_bar.dart';
 
 void main() {
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'SR Villa',
       theme: ThemeData(),
-      home: const NavBar(),
+      home: const PemesananScreen(),
     );
   }
 }
