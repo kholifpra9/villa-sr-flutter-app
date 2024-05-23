@@ -2,6 +2,7 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:villa_sr_app/core.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -71,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
               alignment: Alignment.centerLeft,
               padding: const EdgeInsets.only(left: 20),
               child: const Text(
-                "Penginapan",
+                "Katalog",
                 style: TextStyle(
                   fontSize: 22.5,
                   fontWeight: FontWeight.bold,
@@ -86,7 +87,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     "id": 1,
                     "photo":
                         "https://i.ibb.co/6NZ8dGk/Holiday-Travel-Agent-Promotion-Banner-Landscape.png",
-                    "onTap": (item) {},
+                    "onTap": (context) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => VillaView()),
+                      );
+                    },
                   },
                   {
                     "id": 2,
@@ -109,20 +115,24 @@ class _HomeScreenState extends State<HomeScreen> {
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
                       var item = items[index];
-                      return Container(
-                        height: 100.0,
-                        width: MediaQuery.of(context).size.width * 0.7,
-                        margin: const EdgeInsets.only(right: 12.0, left: 12.0),
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: NetworkImage(
-                              item["photo"],
+                      return GestureDetector(
+                        onTap: () => item['onTap'](context),
+                        child: Container(
+                          height: 100.0,
+                          width: MediaQuery.of(context).size.width * 0.7,
+                          margin:
+                              const EdgeInsets.only(right: 12.0, left: 12.0),
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                item["photo"],
+                              ),
+                              fit: BoxFit.cover,
                             ),
-                            fit: BoxFit.cover,
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(
-                              16.0,
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(
+                                16.0,
+                              ),
                             ),
                           ),
                         ),

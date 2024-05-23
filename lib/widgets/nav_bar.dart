@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:villa_sr_app/screens/home_screen.dart';
-import 'package:villa_sr_app/screens/pemesanan_screen.dart';
+import 'package:villa_sr_app/core.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
@@ -19,15 +18,22 @@ class _NavBarState extends State<NavBar> {
       child: Scaffold(
         body: IndexedStack(
           index: selectedIndex,
+          // ignore: prefer_const_literals_to_create_immutables
           children: [
             const HomeScreen(),
             const PemesananScreen(),
             Container(
-              color: Colors.purple[100],
+              height: 100.0,
+              decoration: const BoxDecoration(
+                color: Colors.orange,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(
+                    8.0,
+                  ),
+                ),
+              ),
             ),
-            Container(
-              color: Colors.blue[100],
-            ),
+            const VillaView()
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(

@@ -1,5 +1,6 @@
+import 'package:villa_sr_app/state_util.dart';
+import 'package:villa_sr_app/core.dart';
 import 'package:flutter/material.dart';
-import 'package:villa_sr_app/screens/pemesanan_screen.dart';
 import 'package:villa_sr_app/widgets/nav_bar.dart';
 
 void main() {
@@ -14,8 +15,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'SR Villa',
+      navigatorKey: Get.navigatorKey,
       theme: ThemeData(),
-      home: const PemesananScreen(),
+      home: const NavBar(),
     );
   }
 }
