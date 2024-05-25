@@ -66,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 }).toList(),
               );
             }),
-            const SizedBox(height: 20),
+            const SizedBox(height: 40),
             //penginapan
             Container(
               alignment: Alignment.centerLeft,
@@ -90,7 +90,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     "onTap": (context) {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => VillaView()),
+                        MaterialPageRoute(
+                            builder: (context) => const VillaView()),
                       );
                     },
                   },
@@ -143,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
 
-            const SizedBox(height: 20),
+            const SizedBox(height: 40),
             //penawaran
             Container(
               alignment: Alignment.centerLeft,
@@ -218,7 +219,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
 
-            const SizedBox(height: 35),
+            const SizedBox(height: 40),
             //Rekomendasi Terdekat
             Container(
               alignment: Alignment.centerLeft,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:villa_sr_app/controllers/user_controller.dart';
 
 class PemesananScreen extends StatefulWidget {
@@ -49,7 +48,7 @@ class _PemesananScreenState extends State<PemesananScreen> {
                       Flexible(
                         child: Container(
                           width: 280,
-                          child: Text(
+                          child: const Text(
                             "Belum ada pemesanan!",
                             textAlign: TextAlign.center,
                             style: TextStyle(
@@ -64,9 +63,9 @@ class _PemesananScreenState extends State<PemesananScreen> {
                     children: [
                       Flexible(
                         child: Container(
-                          margin: EdgeInsets.only(top: 10, bottom: 10),
+                          margin: const EdgeInsets.only(top: 10, bottom: 10),
                           width: 340,
-                          child: Text(
+                          child: const Text(
                             "Silahkan tentukan tujuan anda & mulai pemesanan sekarang",
                             textAlign: TextAlign.center,
                             style: TextStyle(
@@ -82,8 +81,9 @@ class _PemesananScreenState extends State<PemesananScreen> {
                       Flexible(
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              backgroundColor: Color.fromARGB(255, 185, 40, 40),
-                              minimumSize: Size(150, 50),
+                              backgroundColor:
+                                  const Color.fromARGB(255, 185, 40, 40),
+                              minimumSize: const Size(150, 50),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12))),
                           onPressed: () {},

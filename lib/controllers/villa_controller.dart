@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:villa_sr_app/core.dart';
-import 'package:villa_sr_app/services/villa_servie.dart';
-import '../view/villa/villa_view.dart';
 
 class VillaController extends State<VillaView> {
   static late VillaController instance;
