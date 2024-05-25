@@ -1,18 +1,12 @@
-// ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
-
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:villa_sr_app/core.dart';
+import '../controllers/login_controller.dart';
 
 class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+  const LoginView({Key? key}) : super(key: key);
 
-  @override
-  State<LoginView> createState() => _LoginViewState();
-}
-
-class _LoginViewState extends State<LoginView> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(context, LoginController controller) {
+    controller.view = this;
     return Theme(
       data: ThemeData(
         primaryColor: const Color(0xFF6F35A5),
@@ -47,38 +41,41 @@ class _LoginViewState extends State<LoginView> {
           child: Stack(
             alignment: Alignment.center,
             children: <Widget>[
-              Positioned(
-                top: 50,
-                child: Image.network(
-                  "https://e1.pngegg.com/pngimages/822/197/png-clipart-band-logos-metallica-logo-thumbnail.png",
-                  width: 300,
-                ),
-              ),
+              // Positioned(
+              //   top: 50,
+              //   child: Image.network(
+              //     "https://e1.pngegg.com/pngimages/822/197/png-clipart-band-logos-metallica-logo-thumbnail.png",
+              //     width: 300,
+              //   ),
+              // ),
               SafeArea(
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Column(
+                      const Column(
                         children: [
-                          const Text(
-                            "LOGIN",
+                          Text(
+                            "Sindang Restu \nVilla",
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 30),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 30,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
-                          const SizedBox(height: 16.0 * 2),
-                          Row(
-                            children: [
-                              const Spacer(),
-                              Expanded(
-                                flex: 8,
-                                child: SvgPicture.network(
-                                    "https://capekngoding.com/uploads/62f680358d0a9_login.svg"),
-                              ),
-                              const Spacer(),
-                            ],
-                          ),
-                          const SizedBox(height: 16.0 * 2),
+                          SizedBox(height: 16.0 * 2),
+                          // Row(
+                          //   children: [
+                          //     const Spacer(),
+                          //     Expanded(
+                          //       flex: 8,
+                          //       child: SvgPicture.network(
+                          //           "https://capekngoding.com/uploads/62f680358d0a9_login.svg"),
+                          //     ),
+                          //     const Spacer(),
+                          //   ],
+                          // ),
+                          SizedBox(height: 16.0 * 2),
                         ],
                       ),
                       Row(
@@ -87,15 +84,21 @@ class _LoginViewState extends State<LoginView> {
                           Expanded(
                             flex: 8,
                             child: Form(
+                              key: controller.formKey,
                               child: Column(
                                 children: [
                                   TextFormField(
-                                    keyboardType: TextInputType.emailAddress,
+                                    validator: required,
                                     textInputAction: TextInputAction.next,
-                                    cursorColor: const Color(0xFF6F35A5),
-                                    onSaved: (email) {},
+                                    cursorColor:
+                                        Color.fromARGB(255, 73, 165, 53),
+                                    onChanged: (value) {
+                                      controller.username = value;
+                                    },
                                     decoration: const InputDecoration(
-                                      hintText: "Masukan Email",
+                                      hintText: "Masukan Username/email",
+                                      fillColor:
+                                          Color.fromARGB(255, 177, 236, 178),
                                       prefixIcon: Padding(
                                         padding: EdgeInsets.all(16.0),
                                         child: Icon(Icons.person),
@@ -106,14 +109,23 @@ class _LoginViewState extends State<LoginView> {
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 16.0),
                                     child: TextFormField(
+                                      validator: required,
+                                      onChanged: (value) {
+                                        controller.password = value;
+                                      },
                                       textInputAction: TextInputAction.done,
                                       obscureText: true,
-                                      cursorColor: const Color(0xFF6F35A5),
+                                      cursorColor:
+                                          Color.fromARGB(255, 255, 255, 255),
                                       decoration: const InputDecoration(
                                         hintText: "Masukan Password",
+                                        fillColor:
+                                            Color.fromARGB(255, 177, 236, 178),
                                         prefixIcon: Padding(
                                           padding: EdgeInsets.all(16.0),
-                                          child: Icon(Icons.lock),
+                                          child: Icon(
+                                            Icons.lock,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -122,7 +134,10 @@ class _LoginViewState extends State<LoginView> {
                                   Hero(
                                     tag: "login_btn",
                                     child: ElevatedButton(
-                                      onPressed: () {},
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              Color.fromARGB(255, 87, 193, 78)),
+                                      onPressed: () => controller.doLogin(),
                                       child: Text(
                                         "Login".toUpperCase(),
                                         style: const TextStyle(
@@ -179,5 +194,15 @@ class _LoginViewState extends State<LoginView> {
         ),
       ),
     );
+  }
+
+  @override
+  State<LoginView> createState() => LoginController();
+
+  String? required(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Field ini diperlukan';
+    }
+    return null; // Mengembalikan null jika validasi berhasil
   }
 }
