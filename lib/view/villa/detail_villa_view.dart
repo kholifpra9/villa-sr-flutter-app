@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:input_quantity/input_quantity.dart';
+import 'package:villa_sr_app/core.dart';
+import 'package:villa_sr_app/widgets/date_picker.dart';
 
 class DetailVillaView extends StatefulWidget {
   final Map<String, dynamic> villa;
+
   const DetailVillaView({super.key, required this.villa});
 
   @override
@@ -9,6 +14,50 @@ class DetailVillaView extends StatefulWidget {
 }
 
 class _DetailVillaViewState extends State<DetailVillaView> {
+  DateTime? cekin;
+  DateTime? cekout;
+  int? jmlTamu;
+
+  @override
+  void initState() {
+    super.initState();
+    final now = DateTime.now();
+    jmlTamu = 1;
+    cekin = DateTime(now.year, now.month, now.day);
+    cekout = cekin!.add(Duration(days: 1));
+  }
+
+  void updatecekin(DateTime date) {
+    setState(() {
+      cekin = date;
+      if (cekout != null && cekout!.isBefore(cekin!.add(Duration(days: 1)))) {
+        cekout = cekin!.add(Duration(days: 1));
+      }
+    });
+  }
+
+  void updatecekout(DateTime date) {
+    setState(() {
+      cekout = date;
+      if (cekin != null && cekout!.isBefore(cekin!.add(Duration(days: 1)))) {
+        cekout = cekin!.add(Duration(days: 1));
+      }
+    });
+  }
+
+  int calculateDifferenceInDays() {
+    if (cekin != null && cekout != null) {
+      return cekout!.difference(cekin!).inDays;
+    }
+    return 0;
+  }
+
+  double totalharga() {
+    int days = calculateDifferenceInDays();
+    double pricePerNight = widget.villa['harga'];
+    return days * pricePerNight;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,37 +120,219 @@ class _DetailVillaViewState extends State<DetailVillaView> {
               },
             ),
             Container(
-              margin: EdgeInsets.only(left: 20),
+              margin: const EdgeInsets.all(10),
               child: Column(
                 children: [
-                  SizedBox(height: 16.0),
-                  Text(
-                    widget.villa['nama_villa'] + " - " + widget.villa['tipe'],
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  const SizedBox(height: 15),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      widget.villa['nama_villa'] + " - " + widget.villa['tipe'],
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
                   ),
-                  SizedBox(height: 8.0),
-                  Text(
-                    widget.villa['lokasi'],
-                    style: TextStyle(fontSize: 16),
+                  const SizedBox(height: 10),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      widget.villa['lokasi'],
+                      style: const TextStyle(fontSize: 16),
+                    ),
                   ),
-                  SizedBox(height: 8.0),
-                  Text(
-                    "Rp. " + widget.villa['harga'].toString(),
-                    style: TextStyle(fontSize: 16, color: Colors.green),
+                  const SizedBox(height: 8.0),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Tanggal menginap Anda",
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                    ),
                   ),
-                  SizedBox(height: 16.0),
-                  Text(
-                    "Deskripsi Villa",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 8.0),
-                  Text(
-                    widget.villa['deskripsi'] ?? 'Tidak ada deskripsi.',
-                    style: TextStyle(fontSize: 14),
-                  ),
+                  Container(
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(16)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.1),
+                          spreadRadius: 1,
+                          blurRadius: 1,
+                          offset: Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          // Baris pertama berisi Check-in dan Check-out
+                          children: [
+                            Expanded(
+                              // Widget Check-in
+                              child: Container(
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(16)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(1),
+                                      spreadRadius: 1,
+                                      blurRadius: 1,
+                                      offset: Offset(0, 3),
+                                    ),
+                                  ],
+                                ),
+                                child: QDatePicker(
+                                  label: "Tanggal Check-in",
+                                  firstdate: DateTime.now(),
+                                  value: cekin,
+                                  onChanged: (value) {
+                                    updatecekin(value);
+                                  },
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                                width:
+                                    10), // Jarak antara Check-in dan Check-out
+                            Expanded(
+                              // Widget Check-out
+                              child: Container(
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(16)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(1),
+                                      spreadRadius: 1,
+                                      blurRadius: 1,
+                                      offset: Offset(0, 3),
+                                    ),
+                                  ],
+                                ),
+                                child: QDatePicker(
+                                  label: "Tanggal Check-out",
+                                  firstdate: cekin!.add(Duration(days: 1)),
+                                  value: cekout,
+                                  onChanged: (value) {
+                                    updatecekout(value);
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          "${calculateDifferenceInDays()} Malam",
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.normal),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                "Jumlah Tamu",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 14),
+                              ),
+                            ),
+                            Expanded(
+                              child: InputQty(
+                                maxVal: 100,
+                                initVal: 1,
+                                minVal: 0,
+                                steps: 1,
+                                onQtyChanged: (val) {
+                                  jmlTamu = val;
+                                },
+                              ),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                "Booking For",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 14),
+                              ),
+                            ),
+                            Expanded(
+                              child: Text(
+                                "${AuthService.username_}",
+                                style: TextStyle(
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+        padding: const EdgeInsets.all(16.0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: Offset(0, 3),
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: Text(
+                "Rp. ${totalharga().toStringAsFixed(0)}",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green,
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            Expanded(
+              child: ElevatedButton(
+                onPressed: () {
+                  print(cekin);
+                  print(cekout);
+                  print(jmlTamu);
+                  // print(AuthService.username_);
+                },
+                child: Text('Pesan Sekarang'),
+              ),
+            )
           ],
         ),
       ),

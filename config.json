@@ -1,6 +1,6 @@
 {
     "modules": [
-        "login"
+        "booking"
     ],
     "module_directory_name": "module",
     "experimental_mode": false,

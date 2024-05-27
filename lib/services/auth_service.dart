@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 class AuthService {
   static String? token;
   static int? id;
+  static String? username_;
   Future<bool> login({
     required String username,
     required String password,
@@ -16,7 +17,7 @@ class AuthService {
           },
         ),
         data: {
-          "username": username,
+          "identifier": username,
           "password": password,
         },
       );
@@ -24,6 +25,8 @@ class AuthService {
         Map auth = response.data;
         token = auth["user"]["token"];
         id = auth["user"]["id"];
+        username_ = auth["user"]["username"];
+
         return true; // Login berhasil
       } else {
         return false; // Login gagal, respons tidak 200

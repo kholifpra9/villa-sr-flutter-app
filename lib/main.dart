@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'SR Villa',
       navigatorKey: Get.navigatorKey,
       theme: ThemeData(),
-      home: const LoginView(),
+      home: const VillaView(),
     );
   }
 }
