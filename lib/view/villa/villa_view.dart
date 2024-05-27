@@ -62,7 +62,11 @@ class VillaView extends StatefulWidget {
                     Container(
                       margin: const EdgeInsets.only(left: 15, bottom: 5),
                       alignment: Alignment.centerLeft,
-                      child: Text("Rp. ${item['harga']}"),
+                      child: Text(
+                        "Rp. ${item['harga']}",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
                     )
                   ],
                 ),

@@ -1,4 +1,3 @@
-import 'package:villa_sr_app/state_util.dart';
 import 'package:villa_sr_app/core.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'SR Villa',
       navigatorKey: Get.navigatorKey,
       theme: ThemeData(),
-      home: const VillaView(),
+      home: const LoginView(),
     );
   }
 }

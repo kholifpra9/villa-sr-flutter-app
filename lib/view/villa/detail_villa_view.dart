@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:input_quantity/input_quantity.dart';
+import 'package:villa_sr_app/controllers/booking_controller.dart';
 import 'package:villa_sr_app/core.dart';
 import 'package:villa_sr_app/widgets/date_picker.dart';
 
@@ -14,9 +14,14 @@ class DetailVillaView extends StatefulWidget {
 }
 
 class _DetailVillaViewState extends State<DetailVillaView> {
+  final controllerBooking = BookingController();
   DateTime? cekin;
   DateTime? cekout;
   int? jmlTamu;
+  int? jmlMalam;
+  double? totalBayar;
+  int? villaId;
+  int? userId;
 
   @override
   void initState() {
@@ -25,6 +30,8 @@ class _DetailVillaViewState extends State<DetailVillaView> {
     jmlTamu = 1;
     cekin = DateTime(now.year, now.month, now.day);
     cekout = cekin!.add(Duration(days: 1));
+    villaId = widget.villa["id"];
+    userId = AuthService.id;
   }
 
   void updatecekin(DateTime date) {
@@ -47,6 +54,7 @@ class _DetailVillaViewState extends State<DetailVillaView> {
 
   int calculateDifferenceInDays() {
     if (cekin != null && cekout != null) {
+      jmlMalam = cekout!.difference(cekin!).inDays;
       return cekout!.difference(cekin!).inDays;
     }
     return 0;
@@ -55,6 +63,7 @@ class _DetailVillaViewState extends State<DetailVillaView> {
   double totalharga() {
     int days = calculateDifferenceInDays();
     double pricePerNight = widget.villa['harga'];
+    totalBayar = days * pricePerNight;
     return days * pricePerNight;
   }
 
@@ -142,14 +151,6 @@ class _DetailVillaViewState extends State<DetailVillaView> {
                   ),
                   const SizedBox(height: 8.0),
                   Container(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Tanggal menginap Anda",
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Container(
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -165,6 +166,15 @@ class _DetailVillaViewState extends State<DetailVillaView> {
                     ),
                     child: Column(
                       children: [
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Tanggal menginap Anda",
+                            style: TextStyle(
+                                fontSize: 14, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        SizedBox(height: 10),
                         Row(
                           // Baris pertama berisi Check-in dan Check-out
                           children: [
@@ -324,12 +334,19 @@ class _DetailVillaViewState extends State<DetailVillaView> {
             ),
             Expanded(
               child: ElevatedButton(
-                onPressed: () {
-                  print(cekin);
-                  print(cekout);
-                  print(jmlTamu);
-                  // print(AuthService.username_);
-                },
+                onPressed: () => controllerBooking.doSave(cekin, cekout,
+                    jmlMalam, jmlTamu, totalBayar, villaId, userId),
+                // {
+                //   BookingController();
+                //   print("cekin : $cekin");
+                //   print("cekout : $cekout");
+                //   print("jml_malam : $jmlMalam");
+                //   print("jml_tamu : $jmlTamu");
+                //   print("villa : $villaId");
+                //   print("user : $userId");
+                //   print("bayar : $totalBayar");
+                //   // print(AuthService.username_);
+                // },
                 child: Text('Pesan Sekarang'),
               ),
             )
