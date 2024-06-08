@@ -1,6 +1,21 @@
 import 'package:dio/dio.dart';
+import 'package:villa_sr_app/core.dart';
 
 class BookingService {
+  Future<List> getBookingsByUser() async {
+    var response = await Dio().get(
+      "http://127.0.0.1:8000/api/booking",
+      options: Options(
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer ${AuthService.token}",
+        },
+      ),
+    );
+    Map obj = response.data;
+    return obj['data'];
+  }
+
   Future<bool> store({
     required DateTime tglCekin,
     required DateTime tglCekout,

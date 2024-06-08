@@ -20,9 +20,10 @@ class PemesananView extends StatefulWidget {
         actions: const [],
       ),
       body: ListView.builder(
-        itemCount: 3,
+        itemCount: controller.bookedByUser.length,
         physics: const ScrollPhysics(),
         itemBuilder: (BuildContext context, int index) {
+          var item = controller.bookedByUser[index];
           return Card(
             child: ListTile(
               leading: CircleAvatar(
@@ -31,8 +32,8 @@ class PemesananView extends StatefulWidget {
                   "https://res.cloudinary.com/dotz74j1p/raw/upload/v1716045088/aqwqm57kunudfs2y5swr.png",
                 ),
               ),
-              title: const Text("Jessica Doe"),
-              subtitle: const Text("Programmer"),
+              title: Text("${item["id"]}"),
+              subtitle: Text(item["status"]),
             ),
           );
         },

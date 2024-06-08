@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:villa_sr_app/core.dart';
 import '../view/pemesanan_view.dart';
@@ -9,13 +8,9 @@ class PemesananController extends State<PemesananView> {
 
   @override
   void initState() {
-    super.initState();
     instance = this;
-    WidgetsBinding.instance.addPostFrameCallback((_) => onReady());
-  }
-
-  void onReady() {
-    
+    getBookingByUser();
+    super.initState();
   }
 
   @override
@@ -25,5 +20,10 @@ class PemesananController extends State<PemesananView> {
 
   @override
   Widget build(BuildContext context) => widget.build(context, this);
+
+  List bookedByUser = [];
+  getBookingByUser() async {
+    bookedByUser = await BookingService().getBookingsByUser();
+    setState(() {});
+  }
 }
-    
