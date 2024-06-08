@@ -98,7 +98,7 @@ class LoginView extends StatefulWidget {
                                     decoration: const InputDecoration(
                                       hintText: "Masukan Username/email",
                                       fillColor:
-                                          Color.fromARGB(255, 177, 236, 178),
+                                          Color.fromARGB(255, 239, 239, 239),
                                       prefixIcon: Padding(
                                         padding: EdgeInsets.all(16.0),
                                         child: Icon(Icons.person),
@@ -120,7 +120,7 @@ class LoginView extends StatefulWidget {
                                       decoration: const InputDecoration(
                                         hintText: "Masukan Password",
                                         fillColor:
-                                            Color.fromARGB(255, 177, 236, 178),
+                                            Color.fromARGB(255, 239, 239, 239),
                                         prefixIcon: Padding(
                                           padding: EdgeInsets.all(16.0),
                                           child: Icon(

@@ -87,19 +87,19 @@ class _DetailVillaViewState extends State<DetailVillaView> {
                   {
                     "id": 1,
                     "photo":
-                        "https://res.cloudinary.com/dotz74j1p/raw/upload/v1716045413/v9mct2dsiepfm8im8n2y.png",
+                        "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=2448,h=928,fit=crop/YX44ly25pWflV6nD/4-AzG8b5rOXXUOKNDr.jpg",
                     "onTap": (item) {},
                   },
                   {
                     "id": 2,
                     "photo":
-                        "https://res.cloudinary.com/dotz74j1p/raw/upload/v1716045418/pxztfthdjnzsvdsv48fb.png",
+                        "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=861,h=575,fit=crop/YX44ly25pWflV6nD/18-A85rEr4bGLcZEQ7R.jpg",
                     "onTap": (item) {},
                   },
                   {
                     "id": 3,
                     "photo":
-                        "https://res.cloudinary.com/dotz74j1p/raw/upload/v1716045423/cd5buk49nzy48j4ynlvq.png",
+                        "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=861,h=575,fit=crop/YX44ly25pWflV6nD/whatsapp-image-2022-11-13-at-06.17.38-d95r73Zzj9u4en0o.jpeg",
                     "onTap": (item) {},
                   }
                 ];
@@ -334,8 +334,16 @@ class _DetailVillaViewState extends State<DetailVillaView> {
             ),
             Expanded(
               child: ElevatedButton(
-                onPressed: () => controllerBooking.doSave(cekin, cekout,
-                    jmlMalam, jmlTamu, totalBayar, villaId, userId),
+                onPressed: () => BookingController.doSave(
+                  context,
+                  cekin,
+                  cekout,
+                  jmlMalam,
+                  jmlTamu,
+                  totalBayar,
+                  villaId,
+                  userId,
+                ),
                 // {
                 //   BookingController();
                 //   print("cekin : $cekin");

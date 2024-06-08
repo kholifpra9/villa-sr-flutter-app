@@ -21,18 +21,8 @@ class _NavBarState extends State<NavBar> {
           // ignore: prefer_const_literals_to_create_immutables
           children: [
             const HomeScreen(),
-            const PemesananScreen(),
-            Container(
-              height: 100.0,
-              decoration: const BoxDecoration(
-                color: Colors.orange,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(
-                    8.0,
-                  ),
-                ),
-              ),
-            ),
+            const PemesananView(),
+            const BantuanView(),
             const VillaView()
           ],
         ),

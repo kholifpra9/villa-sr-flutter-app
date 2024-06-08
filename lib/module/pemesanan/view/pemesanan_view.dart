@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:villa_sr_app/controllers/user_controller.dart';
+import 'package:villa_sr_app/core.dart';
+import '../controller/pemesanan_controller.dart';
 
-class PemesananScreen extends StatefulWidget {
-  const PemesananScreen({super.key});
+class PemesananView extends StatefulWidget {
+  const PemesananView({Key? key}) : super(key: key);
 
-  @override
-  State<PemesananScreen> createState() => _PemesananScreenState();
-
-  build(BuildContext context, UserController userController) {}
-}
-
-class _PemesananScreenState extends State<PemesananScreen> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(context, PemesananController controller) {
+    controller.view = this;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -103,4 +97,7 @@ class _PemesananScreenState extends State<PemesananScreen> {
       ),
     );
   }
+
+  @override
+  State<PemesananView> createState() => PemesananController();
 }

@@ -18,7 +18,9 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text(
           "SR VILLA",
-          style: TextStyle(color: Colors.red, fontWeight: FontWeight.w900),
+          style: TextStyle(
+              color: Color.fromARGB(255, 39, 214, 9),
+              fontWeight: FontWeight.w900),
         ),
         actions: const [],
       ),
@@ -29,11 +31,11 @@ class _HomeScreenState extends State<HomeScreen> {
             //carousell
             Builder(builder: (context) {
               List images = [
-                "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-                "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-                "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=781&q=80",
-                "https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80",
-                "https://images.unsplash.com/photo-1482049016688-2d3e1b311543?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=710&q=80",
+                "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=808,h=586,fit=crop/YX44ly25pWflV6nD/11-AzGk5Pr2bPUDy6Wp.jpg",
+                "https://assets.zyrosite.com/YX44ly25pWflV6nD/13-AzGk5Pr26MTeoRzD.jpg",
+                "https://assets.zyrosite.com/YX44ly25pWflV6nD/10-meP04wLzxNIJaWZO.jpg",
+                "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=506,h=506,fit=crop/YX44ly25pWflV6nD/15-mP4ea1pVPofpBwXK.jpg",
+                "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=506,h=506,fit=crop/YX44ly25pWflV6nD/2-mk30PwDRjPS7nDva.jpg",
               ];
 
               return CarouselSlider(
@@ -86,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   {
                     "id": 1,
                     "photo":
-                        "https://i.ibb.co/6NZ8dGk/Holiday-Travel-Agent-Promotion-Banner-Landscape.png",
+                        "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=861,h=575,fit=crop/YX44ly25pWflV6nD/whatsapp-image-2022-09-09-at-00.44.36-d95r7rQON7svvyL0.jpeg",
                     "onTap": (context) {
                       Navigator.push(
                         context,
@@ -95,18 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     },
                   },
-                  {
-                    "id": 2,
-                    "photo":
-                        "https://i.ibb.co/5xfjdy9/Blue-Modern-Discount-Banner.png",
-                    "onTap": (item) {},
-                  },
-                  {
-                    "id": 3,
-                    "photo":
-                        "https://i.ibb.co/6Rvjyy1/Brown-Yellow-Free-Furniture-Promotion-Banner.png",
-                    "onTap": (item) {},
-                  }
+                  // Add more items as needed
                 ];
 
                 return SizedBox(
@@ -118,24 +109,40 @@ class _HomeScreenState extends State<HomeScreen> {
                       var item = items[index];
                       return GestureDetector(
                         onTap: () => item['onTap'](context),
-                        child: Container(
-                          height: 100.0,
-                          width: MediaQuery.of(context).size.width * 0.7,
-                          margin:
-                              const EdgeInsets.only(right: 12.0, left: 12.0),
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                item["photo"],
+                        child: Stack(
+                          children: [
+                            Container(
+                              height: 100.0,
+                              width: MediaQuery.of(context).size.width * 0.7,
+                              margin: const EdgeInsets.only(
+                                  right: 12.0, left: 12.0),
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: NetworkImage(item["photo"]),
+                                  fit: BoxFit.cover,
+                                ),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(16.0),
+                                ),
                               ),
-                              fit: BoxFit.cover,
                             ),
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(
-                                16.0,
+                            Positioned(
+                              bottom: 8.0,
+                              left: 8.0,
+                              child: Container(
+                                padding: const EdgeInsets.all(15.0),
+                                color: Colors.black.withOpacity(
+                                    0.5), // Background color for text
+                                child: Text(
+                                  "Cari Villa disini!",
+                                  style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ),
-                          ),
+                          ],
                         ),
                       );
                     },
@@ -143,7 +150,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               },
             ),
-
             const SizedBox(height: 40),
             //penawaran
             Container(
@@ -163,7 +169,7 @@ class _HomeScreenState extends State<HomeScreen> {
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: NetworkImage(
-                    "https://images.unsplash.com/photo-1550547660-d9450f859349?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80",
+                    "https://i.pinimg.com/564x/89/c1/df/89c1dfaf3e2bf035718cf2a76a16fd38.jpg",
                   ),
                   fit: BoxFit.cover,
                 ),
@@ -240,19 +246,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
                 },
                 {
-                  "label": "Main Course",
+                  "label": "Wisata",
                   "image":
-                      "https://images.unsplash.com/photo-1593253787226-567eda4ad32d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
-                },
-                {
-                  "label": "Drink",
-                  "image":
-                      "https://images.unsplash.com/photo-1527661591475-527312dd65f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=415&q=80",
-                },
-                {
-                  "label": "Snack",
-                  "image":
-                      "https://images.unsplash.com/photo-1580314552228-5a7ce023fc9e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=388&q=80",
+                      "https://i.pinimg.com/736x/ff/f4/3a/fff43a2e6fe4193ff37a7819d3cfdd37.jpg",
                 },
               ];
 
