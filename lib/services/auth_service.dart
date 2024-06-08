@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
   static String? token;
@@ -23,9 +24,14 @@ class AuthService {
       );
       if (response.statusCode == 200) {
         Map auth = response.data;
-        token = auth["user"]["token"];
+        token = auth["token"];
         id = auth["user"]["id"];
         username_ = auth["user"]["username"];
+
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('token', token!);
+        await prefs.setInt('id', id!);
+        await prefs.setString('username', username_!);
 
         return true; // Login berhasil
       } else {
@@ -35,5 +41,13 @@ class AuthService {
       print("Error: $e"); // Tampilkan pesan kesalahan
       return false; // Login gagal karena kesalahan
     }
+  }
+
+  Future<bool> isLoggedIn() async {
+    final prefs = await SharedPreferences.getInstance();
+    token = prefs.getString('token');
+    id = prefs.getInt('id');
+    username_ = prefs.getString('username');
+    return token != null;
   }
 }

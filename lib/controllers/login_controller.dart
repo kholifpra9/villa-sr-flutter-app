@@ -45,7 +45,8 @@ class LoginController extends State<LoginView> {
     if (!isSuccess) {
       InfoDialog.show(context, "Username/email/password Salah!");
     } else {
-      Get.offAll(NavBar());
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const NavBar()));
     }
   }
 }

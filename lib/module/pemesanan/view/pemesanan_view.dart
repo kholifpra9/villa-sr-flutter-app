@@ -3,7 +3,7 @@ import 'package:villa_sr_app/core.dart';
 import '../controller/pemesanan_controller.dart';
 
 class PemesananView extends StatefulWidget {
-  const PemesananView({Key? key}) : super(key: key);
+  const PemesananView({super.key});
 
   Widget build(context, PemesananController controller) {
     controller.view = this;
@@ -19,81 +19,23 @@ class PemesananView extends StatefulWidget {
         ),
         actions: const [],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              alignment: Alignment.center,
-              height: 600.0,
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 255, 255, 255),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(
-                    8.0,
-                  ),
+      body: ListView.builder(
+        itemCount: 3,
+        physics: const ScrollPhysics(),
+        itemBuilder: (BuildContext context, int index) {
+          return Card(
+            child: ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Colors.grey[200],
+                backgroundImage: const NetworkImage(
+                  "https://res.cloudinary.com/dotz74j1p/raw/upload/v1716045088/aqwqm57kunudfs2y5swr.png",
                 ),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Flexible(
-                        child: Container(
-                          width: 280,
-                          child: const Text(
-                            "Belum ada pemesanan!",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: 20.0, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Flexible(
-                        child: Container(
-                          margin: const EdgeInsets.only(top: 10, bottom: 10),
-                          width: 340,
-                          child: const Text(
-                            "Silahkan tentukan tujuan anda & mulai pemesanan sekarang",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: 13.0, fontWeight: FontWeight.normal),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Flexible(
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor:
-                                  const Color.fromARGB(255, 185, 40, 40),
-                              minimumSize: const Size(150, 50),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12))),
-                          onPressed: () {},
-                          child: const Text(
-                            "Pesan Sekarang",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+              title: const Text("Jessica Doe"),
+              subtitle: const Text("Programmer"),
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
