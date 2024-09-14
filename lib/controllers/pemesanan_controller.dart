@@ -21,7 +21,7 @@ class PemesananController extends State<PemesananView> {
   Widget build(BuildContext context) => widget.build(context, this);
 
   List bookedByUser = [];
-  getBookingByUser() async {
+  Future<void> getBookingByUser() async {
     bookedByUser = await BookingService().getBookingsByUser();
     setState(() {});
   }

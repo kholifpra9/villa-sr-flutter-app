@@ -32,8 +32,14 @@ class _NavBarState extends State<NavBar> {
           selectedItemColor: const Color.fromARGB(255, 202, 54, 54),
           unselectedItemColor: Colors.grey[500],
           onTap: (index) {
-            selectedIndex = index;
-            setState(() {});
+            setState(() {
+              selectedIndex = index;
+              if (selectedIndex == 1) {
+                // Panggil fungsi refresh data di sini jika berada di tab Pemesanan
+                PemesananController controller = PemesananController();
+                controller.getBookingByUser();
+              }
+            });
           },
           items: const [
             BottomNavigationBarItem(

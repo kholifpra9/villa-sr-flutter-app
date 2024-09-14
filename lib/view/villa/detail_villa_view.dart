@@ -132,6 +132,7 @@ class _DetailVillaViewState extends State<DetailVillaView> {
               margin: const EdgeInsets.all(10),
               child: Column(
                 children: [
+                  Text("$cekout"),
                   const SizedBox(height: 15),
                   Container(
                     alignment: Alignment.centerLeft,
