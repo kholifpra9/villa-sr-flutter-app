@@ -16,6 +16,62 @@ class BookingService {
     return obj['data'];
   }
 
+  Future<List> getBookingsByUserDipesan() async {
+    var response = await Dio().get(
+      "http://192.168.1.6:8080/api/booking/dipesan",
+      options: Options(
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer ${AuthService.token}",
+        },
+      ),
+    );
+    Map obj = response.data;
+    return obj['data'];
+  }
+
+  Future<List> getBookingsByUserDibayar() async {
+    var response = await Dio().get(
+      "http://192.168.1.6:8080/api/booking/dibayar",
+      options: Options(
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer ${AuthService.token}",
+        },
+      ),
+    );
+    Map obj = response.data;
+    return obj['data'];
+  }
+
+  Future<List> getBookingsByUserSelesai() async {
+    var response = await Dio().get(
+      "http://192.168.1.6:8080/api/booking/selesai",
+      options: Options(
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer ${AuthService.token}",
+        },
+      ),
+    );
+    Map obj = response.data;
+    return obj['data'];
+  }
+
+  Future<List> getBookingsByUserCanceled() async {
+    var response = await Dio().get(
+      "http://192.168.1.6:8080/api/booking/canceled",
+      options: Options(
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer ${AuthService.token}",
+        },
+      ),
+    );
+    Map obj = response.data;
+    return obj['data'];
+  }
+
   Future<Map<String, dynamic>?> store({
     required DateTime tglCekin,
     required DateTime tglCekout,

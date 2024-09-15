@@ -1,14 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:villa_sr_app/core.dart';
-import '../../controllers/detail_pemesanan_controller.dart';
 
 class DetailPemesananView extends StatefulWidget {
   final Map<String, dynamic> bookingData;
   const DetailPemesananView({super.key, required this.bookingData});
 
   Widget build(context, DetailPemesananController controller) {
+    int bookingId = bookingData['id'];
     controller.view = this;
     return Scaffold(
       appBar: AppBar(
@@ -60,7 +59,9 @@ class DetailPemesananView extends StatefulWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => PembayaranView()),
+                            builder: (context) => PembayaranView(
+                                  booking_id: bookingId,
+                                )),
                       );
                     },
                     child: const Text("Bayar DP Sekarang!"),

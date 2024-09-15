@@ -35,9 +35,11 @@ class _NavBarState extends State<NavBar> {
             setState(() {
               selectedIndex = index;
               if (selectedIndex == 1) {
-                // Panggil fungsi refresh data di sini jika berada di tab Pemesanan
-                PemesananController controller = PemesananController();
-                controller.getBookingByUser();
+                // Ganti tab Pemesanan agar di-reload setiap kali diklik
+                PemesananController.instance.getBookingByUserDipesan();
+                PemesananController.instance.getBookingByUserDibayar();
+                PemesananController.instance.getBookingByUserSelesai();
+                PemesananController.instance.getBookingByUserCanceled();
               }
             });
           },

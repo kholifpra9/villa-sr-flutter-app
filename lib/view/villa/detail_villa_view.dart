@@ -62,7 +62,7 @@ class _DetailVillaViewState extends State<DetailVillaView> {
 
   double totalharga() {
     int days = calculateDifferenceInDays();
-    double pricePerNight = widget.villa['harga'];
+    double pricePerNight = (widget.villa['harga'] as num).toDouble();
     totalBayar = days * pricePerNight;
     return days * pricePerNight;
   }

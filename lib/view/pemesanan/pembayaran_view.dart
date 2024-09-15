@@ -1,12 +1,18 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:villa_sr_app/core.dart';
 import '../../controllers/pembayaran_controller.dart';
 import '../../widgets/image_picker.dart';
 
 class PembayaranView extends StatefulWidget {
-  const PembayaranView({super.key});
+  final int booking_id;
+  const PembayaranView({super.key, required this.booking_id});
 
   Widget build(context, PembayaranController controller) {
+    String? buktiTF;
+    int? bookingId;
+    bookingId = booking_id;
     controller.view = this;
     return Scaffold(
       appBar: AppBar(
@@ -18,18 +24,26 @@ class PembayaranView extends StatefulWidget {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
+              Text(
+                "Booking ID : $bookingId",
+                style: const TextStyle(
+                    fontWeight: FontWeight.normal, fontSize: 14),
+              ),
               QImagePicker(
                 label: "Photo",
                 validator: Validator.required,
                 value: null,
-                onChanged: (value) {},
+                onChanged: (value) {
+                  buktiTF = value;
+                },
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black,
                   foregroundColor: Colors.white,
                 ),
-                onPressed: () {},
+                onPressed: () =>
+                    BayarController.doSave(context, buktiTF, bookingId),
                 child: const Text("Kirim Bukti Pembayaran"),
               ),
             ],

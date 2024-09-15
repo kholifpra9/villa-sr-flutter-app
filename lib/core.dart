@@ -6,7 +6,7 @@ it means you have to rename it to something more unique.
 export 'package:villa_sr_app/constants.dart';
 export 'package:villa_sr_app/controllers/booking_controller.dart';
 export 'package:villa_sr_app/controllers/detail_pemesanan_controller.dart';
-export 'package:villa_sr_app/controllers/pembayaran_controller.dart';
+
 export 'package:villa_sr_app/controllers/pemesanan_controller.dart';
 export 'package:villa_sr_app/controllers/user_controller.dart';
 export 'package:villa_sr_app/controllers/villa_controller.dart';
