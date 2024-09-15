@@ -23,13 +23,13 @@ class _NavBarState extends State<NavBar> {
             const HomeScreen(),
             const PemesananView(),
             const BantuanView(),
-            const VillaView()
+            const AkunView()
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: selectedIndex,
-          selectedItemColor: const Color.fromARGB(255, 202, 54, 54),
+          selectedItemColor: Color.fromARGB(255, 39, 214, 9),
           unselectedItemColor: Colors.grey[500],
           onTap: (index) {
             setState(() {

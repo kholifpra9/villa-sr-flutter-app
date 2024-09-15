@@ -4,7 +4,7 @@ import 'package:villa_sr_app/core.dart';
 class BookingService {
   Future<List> getBookingsByUser() async {
     var response = await Dio().get(
-      "http://127.0.0.1:8000/api/booking",
+      "http://192.168.1.6:8080/api/booking",
       options: Options(
         headers: {
           "Content-Type": "application/json",
@@ -16,7 +16,7 @@ class BookingService {
     return obj['data'];
   }
 
-  Future<bool> store({
+  Future<Map<String, dynamic>?> store({
     required DateTime tglCekin,
     required DateTime tglCekout,
     required int jmlMalam,
@@ -27,10 +27,11 @@ class BookingService {
   }) async {
     try {
       var response = await Dio().post(
-        "http://127.0.0.1:8000/api/booking/store",
+        "http://192.168.1.6:8080/api/booking/store", // Ganti '127.0.0.1' sesuai kebutuhan
         options: Options(
           headers: {
             "Content-Type": "application/json",
+            "Authorization": "Bearer ${AuthService.token}",
           },
         ),
         data: {
@@ -44,11 +45,17 @@ class BookingService {
           "user_id": userId
         },
       );
-      print("Response: ${response.data}");
-      return true;
+
+      // Jika API mengembalikan data booking baru, kembalikan data tersebut
+      return response.data['data'];
     } catch (e) {
-      print("Error: $e");
-      return false;
+      // Gunakan DioError untuk handling error lebih spesifik
+      if (e is DioError) {
+        print("DioError: ${e.response?.data ?? e.message}");
+      } else {
+        print("Error: $e");
+      }
+      return null;
     }
   }
 }

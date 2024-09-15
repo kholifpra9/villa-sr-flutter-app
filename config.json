@@ -1,6 +1,6 @@
 {
     "modules": [
-        "detail_pemesanan"
+        "akun"
     ],
     "module_directory_name": "module",
     "experimental_mode": false,

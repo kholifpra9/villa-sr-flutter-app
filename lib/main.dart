@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'SR Villa',
-navigatorKey: Get.navigatorKey,
+      navigatorKey: Get.navigatorKey,
       theme: ThemeData(),
       home: isLoggedIn ? const NavBar() : const LoginView(),
     );

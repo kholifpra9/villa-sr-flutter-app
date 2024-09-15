@@ -11,7 +11,7 @@ class AuthService {
   }) async {
     try {
       var response = await Dio().post(
-        "http://127.0.0.1:8000/api/login",
+        "http://192.168.1.6:8080/api/login",
         options: Options(
           headers: {
             "Content-Type": "application/json",

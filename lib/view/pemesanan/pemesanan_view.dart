@@ -10,7 +10,7 @@ class PemesananView extends StatefulWidget {
     controller.view = this;
     return DefaultTabController(
       initialIndex: 0,
-      length: 3,
+      length: 4,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Pemesanan'),
@@ -18,6 +18,9 @@ class PemesananView extends StatefulWidget {
             tabs: <Widget>[
               Tab(
                 text: "Dipesan",
+              ),
+              Tab(
+                text: "Dibayar",
               ),
               Tab(
                 text: "Selesai",
@@ -30,6 +33,7 @@ class PemesananView extends StatefulWidget {
         ),
         body: TabBarView(
           children: <Widget>[
+            //belum Dibayar
             ListView.builder(
               itemCount: controller.bookedByUser.length,
               physics: const ScrollPhysics(),
@@ -80,7 +84,9 @@ class PemesananView extends StatefulWidget {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  DetailPemesananView()),
+                                                  DetailPemesananView(
+                                                    bookingData: item,
+                                                  )),
                                         );
                                       },
                                       child: Text('Lihat Detail & Bayar')),
@@ -98,6 +104,9 @@ class PemesananView extends StatefulWidget {
                   ),
                 ]);
               },
+            ),
+            Center(
+              child: Text("dibayar"),
             ),
             Center(
               child: Text("It's rainy here"),
