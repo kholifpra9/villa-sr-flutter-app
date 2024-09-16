@@ -85,10 +85,15 @@ class BookingService {
       );
 
       if (response.statusCode == 200) {
-        return response.data['message']; // Atau sesuai dengan format response
+        return response.data['message']; // Return pesan sukses
+      } else {
+        // Jika status bukan 200, tangani kasus ini dan return pesan error
+        return "Error: Status code ${response.statusCode}";
       }
     } catch (e) {
-      throw e; // Tangani error di tempat lain
+      // Tangani error yang terjadi saat mengakses API
+      print("Error during API call: $e");
+      return "Error: Terjadi kesalahan saat membatalkan booking"; // Return pesan error default
     }
   }
 
