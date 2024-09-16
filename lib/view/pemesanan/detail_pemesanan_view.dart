@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:villa_sr_app/core.dart';
 
+// ignore: non_constant_identifier_names
+int? booking_id;
+
 class DetailPemesananView extends StatefulWidget {
   final Map<String, dynamic> bookingData;
   const DetailPemesananView({super.key, required this.bookingData});
 
   Widget build(context, DetailPemesananController controller) {
+    booking_id = bookingData['id'];
     int bookingId = bookingData['id'];
     double bayarDP = bookingData['totalBayar'] / 2;
     String bookingStatus =
@@ -211,10 +215,21 @@ class DetailPemesananView extends StatefulWidget {
                   minimumSize:
                       const Size.fromHeight(50), // Memastikan tombol memanjang
                 ),
-                onPressed: () => BookingController.canceled(context, bookingId),
+                onPressed: () => _dialogYakin(context),
                 child: const Text(
                   "Batalkan Pemesanan!",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ),
+
+            if (bookingStatus == 'dibayar')
+              OutlinedButton(
+                onPressed: () => _dialogBuilder(context),
+                child: const Text(
+                  'Rules & Check-In',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
           ],
@@ -225,4 +240,86 @@ class DetailPemesananView extends StatefulWidget {
 
   @override
   State<DetailPemesananView> createState() => DetailPemesananController();
+}
+
+Future<void> _dialogBuilder(BuildContext context) {
+  return showDialog<void>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Rules & Check-In'),
+        content: const Text(
+          'Rules Pembatalan\n'
+          '- H-7 sd H5 : Uang Kembali 50%\n'
+          '- H-4 sd H3 : Uang Kembali 25%\n'
+          '- H-2 : Hangus\n\n'
+          'Rules Check-In & Check-Out\n'
+          '- Check-In : Hari H Check-In jam 2\n'
+          '- Check-Out : Hari H Check-out maksimal jam 12\n -Pelunasan pada Saat Checkin \n \n'
+          'Info lebih lanjut hubungi Staff Villa',
+        ),
+        actions: <Widget>[
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: Theme.of(context).textTheme.labelLarge,
+            ),
+            child: const Text('Hubungi Staff Villa'),
+            onPressed: () async {
+              final Uri whatsappUrl = Uri.parse(
+                  "https://wa.me/+6286791552626?text=Tamu%20Villa%20%3A%20Sudah%20bayar%20DP%2C%20%0Aingin%20meminta%20informasi");
+
+              // Mengecek apakah URL bisa dibuka
+              if (await canLaunchUrl(whatsappUrl)) {
+                await launchUrl(whatsappUrl); // Membuka WhatsApp
+              } else {
+                // Jika tidak bisa membuka WhatsApp, tampilkan error
+                throw 'Could not launch $whatsappUrl';
+              }
+            },
+          ),
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: Theme.of(context).textTheme.labelLarge,
+            ),
+            child: const Text('Oke'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
+Future<void> _dialogYakin(BuildContext context) {
+  return showDialog<void>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Pembatalan Pemesanan'),
+        content: const Text('Apakah anda yakin membatalkan pemesanan? \n'),
+        actions: <Widget>[
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: Theme.of(context).textTheme.labelLarge,
+            ),
+            child: const Text('Tidak'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('Batalkan Pemesanan!'),
+              onPressed: () {
+                BookingController.canceled(context, booking_id);
+                Navigator.of(context).pop();
+              }),
+        ],
+      );
+    },
+  );
 }

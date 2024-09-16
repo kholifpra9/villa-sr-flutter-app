@@ -10,11 +10,12 @@ class BantuanView extends StatefulWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
+        backgroundColor: const Color.fromARGB(255, 39, 214, 9),
         title: const Text(
           "Bantuan?",
           style: TextStyle(
-            color: Color.fromARGB(255, 118, 117, 117),
-            fontWeight: FontWeight.normal,
+            color: Color.fromARGB(255, 255, 255, 255),
+            fontWeight: FontWeight.bold,
           ),
         ),
         actions: const [],
@@ -79,9 +80,20 @@ class BantuanView extends StatefulWidget {
                               minimumSize: const Size(150, 50),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12))),
-                          onPressed: () {},
+                          onPressed: () async {
+                            final Uri whatsappUrl = Uri.parse(
+                                "https://wa.me/+6286791552626?text=Tamu%20Villa%20%3A%20Sudah%20bayar%20DP%2C%20%0Aingin%20meminta%20informasi");
+
+                            // Mengecek apakah URL bisa dibuka
+                            if (await canLaunchUrl(whatsappUrl)) {
+                              await launchUrl(whatsappUrl); // Membuka WhatsApp
+                            } else {
+                              // Jika tidak bisa membuka WhatsApp, tampilkan error
+                              throw 'Could not launch $whatsappUrl';
+                            }
+                          },
                           child: const Text(
-                            "Process",
+                            'Hubungi Staff Villa',
                             style: TextStyle(color: Colors.white),
                           ),
                         ),

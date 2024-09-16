@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:villa_sr_app/core.dart';
+import 'package:villa_sr_app/services/auth_service.dart';
 import '../controller/akun_controller.dart';
 
 class AkunView extends StatefulWidget {
@@ -28,19 +29,23 @@ class AkunView extends StatefulWidget {
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: Colors.grey[300],
+        backgroundColor: const Color.fromARGB(255, 39, 214, 9),
+        foregroundColor: Colors.white,
         iconTheme: const IconThemeData(
           color: Colors.white,
         ),
-        title: const Text("Profile"),
+        title: const Text(
+          "Profile",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.logout,
-              size: 24.0,
-            ),
-          ),
+          // IconButton(
+          //   onPressed: () {},
+          //   icon: const Icon(
+          //     Icons.logout,
+          //     size: 24.0,
+          //   ),
+          // ),
         ],
       ),
       body: SingleChildScrollView(
@@ -52,7 +57,7 @@ class AkunView extends StatefulWidget {
                 maxHeight: 110.0,
               ),
               width: MediaQuery.of(context).size.width,
-              color: Color.fromARGB(255, 39, 214, 9),
+              color: Colors.white,
               padding: const EdgeInsets.symmetric(
                 horizontal: 20.0,
               ),
@@ -66,23 +71,23 @@ class AkunView extends StatefulWidget {
                   const SizedBox(
                     width: 8.0,
                   ),
-                  const Expanded(
+                  Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
+                        const Text(
                           "Hello",
                           style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 10.0,
+                            color: Color.fromARGB(255, 0, 0, 0),
+                            fontSize: 12.0,
                           ),
                         ),
                         Text(
-                          "Jhonny Deep",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            color: Colors.white,
+                          "${AuthService.username_}",
+                          style: const TextStyle(
+                            fontSize: 20.0,
+                            color: Color.fromARGB(255, 0, 0, 0),
                           ),
                         ),
                       ],
@@ -91,96 +96,19 @@ class AkunView extends StatefulWidget {
                   const SizedBox(
                     width: 8.0,
                   ),
-                  InkWell(
-                    onTap: () {},
-                    child: CircleAvatar(
-                      radius: 16.0,
-                      backgroundColor: Colors.blueGrey[900],
-                      child: const Icon(
-                        Icons.edit,
-                        size: 12.0,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
+                  // InkWell(
+                  //   onTap: () {},
+                  //   child: CircleAvatar(
+                  //     radius: 16.0,
+                  //     backgroundColor: Colors.blueGrey[900],
+                  //     child: const Icon(
+                  //       Icons.edit,
+                  //       size: 12.0,
+                  //       color: Colors.white,
+                  //     ),
+                  //   ),
+                  // ),
                 ],
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.only(
-                left: 20.0,
-                top: 20.0,
-                right: 20.0,
-                bottom: 0.0,
-              ),
-              child: Card(
-                child: Container(
-                  padding: const EdgeInsets.all(20.0),
-                  child: const Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Icon(Icons.people_alt_outlined),
-                            Text(
-                              "13K",
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              "Followers",
-                              style: TextStyle(
-                                fontSize: 10.0,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Icon(Icons.people_alt_outlined),
-                            Text(
-                              "2K",
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              "Following",
-                              style: TextStyle(
-                                fontSize: 10.0,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Icon(Icons.post_add),
-                            Text(
-                              "2K",
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              "Posts",
-                              style: TextStyle(
-                                fontSize: 10.0,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
               ),
             ),
             Padding(
@@ -189,21 +117,26 @@ class AkunView extends StatefulWidget {
                 builder: (context) {
                   List items = [
                     {
-                      "label": "Addresses",
-                      "icon": Icons.pin_drop,
-                      "on_tap": () {}
+                      "label": "Nama : ${AuthService.nama_}",
+                      "icon": Icons.person_pin_rounded,
                     },
                     {
-                      "label": "Referral code",
-                      "icon": Icons.code,
-                      "on_tap": () {}
+                      "label": "Alamat : ${AuthService.alamat_}",
+                      "icon": Icons.pin_drop_rounded,
                     },
                     {
-                      "label": "Privacy Policy",
-                      "icon": Icons.info,
-                      "on_tap": () {}
+                      "label": "Email : ${AuthService.email_}",
+                      "icon": Icons.email_rounded,
                     },
-                    {"label": "TOS", "icon": Icons.warning, "on_tap": () {}}
+                    {
+                      "label": "No Telepon : ${AuthService.notelp_}",
+                      "icon": Icons.numbers_rounded,
+                    },
+                    {
+                      "label": "Log Out",
+                      "icon": Icons.logout_outlined,
+                      "on_tap": () => _dialogYakin(context)
+                    }
                   ];
 
                   return InkWell(
@@ -239,9 +172,9 @@ class AkunView extends StatefulWidget {
                                     size: 30.0,
                                   ),
                                   title: Text(item["label"]),
-                                  trailing: const Icon(
-                                    Icons.chevron_right,
-                                  ),
+                                  // trailing: const Icon(
+                                  //   Icons.chevron_right,
+                                  // ),
                                 ),
                               ),
                             ),
@@ -261,4 +194,33 @@ class AkunView extends StatefulWidget {
 
   @override
   State<AkunView> createState() => AkunController();
+}
+
+Future<void> _dialogYakin(BuildContext context) {
+  return showDialog<void>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Log Out'),
+        content: const Text('Apakah anda yakin Ingin Log-out? \n'),
+        actions: <Widget>[
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: Theme.of(context).textTheme.labelLarge,
+            ),
+            child: const Text('Tidak'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('Log-out!'),
+              onPressed: () {}),
+        ],
+      );
+    },
+  );
 }
