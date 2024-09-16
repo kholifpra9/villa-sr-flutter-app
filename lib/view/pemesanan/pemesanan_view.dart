@@ -390,7 +390,7 @@ class PemesananView extends StatefulWidget {
                                                     )),
                                           );
                                         },
-                                        child: Text('Lihat Detail & Bayar'),
+                                        child: Text('Lihat Detail'),
                                       ),
                                     ),
                                   )

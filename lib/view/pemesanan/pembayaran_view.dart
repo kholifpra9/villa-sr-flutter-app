@@ -7,7 +7,9 @@ import '../../widgets/image_picker.dart';
 
 class PembayaranView extends StatefulWidget {
   final int booking_id;
-  const PembayaranView({super.key, required this.booking_id});
+  final double bayarDP;
+  const PembayaranView(
+      {super.key, required this.booking_id, required this.bayarDP});
 
   Widget build(context, PembayaranController controller) {
     String? buktiTF;
@@ -28,6 +30,12 @@ class PembayaranView extends StatefulWidget {
                 "Booking ID : $bookingId",
                 style: const TextStyle(
                     fontWeight: FontWeight.normal, fontSize: 14),
+              ),
+              Text(
+                "Total Bayar DP : Rp.$bayarDP",
+                style: const TextStyle(
+                  fontSize: 16.0,
+                ),
               ),
               QImagePicker(
                 label: "Photo",

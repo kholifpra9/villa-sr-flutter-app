@@ -72,6 +72,26 @@ class BookingService {
     return obj['data'];
   }
 
+  Future<String?> canceled({required int bookingID}) async {
+    try {
+      var response = await Dio().post(
+        "http://192.168.1.6:8080/api/booking/canceled/$bookingID",
+        options: Options(
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer ${AuthService.token}",
+          },
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        return response.data['message']; // Atau sesuai dengan format response
+      }
+    } catch (e) {
+      throw e; // Tangani error di tempat lain
+    }
+  }
+
   Future<Map<String, dynamic>?> store({
     required DateTime tglCekin,
     required DateTime tglCekout,

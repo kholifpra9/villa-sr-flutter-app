@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:villa_sr_app/core.dart';
@@ -109,6 +110,60 @@ class BookingController {
       // Tutup loading jika ada error
       Navigator.of(context).pop();
       InfoDialog.show(context, "Terjadi kesalahan: $e");
+      print("Error: $e");
+    }
+  }
+
+  static void canceled(
+    BuildContext context,
+    int? bookingID,
+  ) async {
+    // Jika bookingID null, jangan lanjut
+    if (bookingID == null) {
+      InfoDialog.show(context, "Booking ID tidak valid");
+      return;
+    }
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Center(
+          child: LoadingAnimationWidget.halfTriangleDot(
+            color: Colors.white,
+            size: 80,
+          ),
+        );
+      },
+    );
+
+    try {
+      // Mendapatkan data booking yang dibatalkan
+      var canceled = await BookingService().canceled(bookingID: bookingID);
+
+      // Tutup loading
+      Navigator.of(context).pop();
+
+      // Jika canceled tidak null, booking berhasil dibatalkan
+      if (canceled != null) {
+        show(context, "Pemesanan Berhasil Dibatalkan!", onOkPressed: () {
+          PemesananController.instance.getBookingByUserDipesan();
+          PemesananController.instance.getBookingByUserDibayar();
+          PemesananController.instance.getBookingByUserSelesai();
+          PemesananController.instance.getBookingByUserCanceled();
+          Get.back();
+        });
+      } else {
+        InfoDialog.show(context, "Gagal Dibatalkan");
+      }
+    } catch (e) {
+      Navigator.of(context).pop();
+      String errorMessage = "Terjadi kesalahan";
+      if (e is DioError && e.response != null) {
+        errorMessage =
+            e.response?.data['message'] ?? "Error: ${e.response?.statusCode}";
+      }
+      InfoDialog.show(context, errorMessage);
       print("Error: $e");
     }
   }
